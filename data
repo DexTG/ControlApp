@@ -1,0 +1,692 @@
+{
+  "tcs": [
+    {
+      "code": "TC1.1",
+      "name": "Modelling, Identification & Signal Processing",
+      "items": [
+        "Linear system theory (state-space, transfer functions)",
+        "System ID: ARX/ARMAX/OE, subspace (N4SID)",
+        "Least-squares & Recursive LS (RLS)",
+        "Noise models (ARMA), stochastic processes",
+        "Spectral analysis, FFT, FRF measurement",
+        "Kalman/Wiener filtering for estimation",
+        "Nonlinear models: NARX, Hammerstein–Wiener",
+        "Model validation: AIC/BIC, residuals, cross-val",
+        "Frequency-domain ID (Bode/Nyquist)",
+        "Tooling: MATLAB SI Toolbox, Python (numpy/scipy)"
+      ],
+      "keywords": "transfer function,state-space,ARX,ARMAX,OE,subspace ID,RLS,FRF,AIC,BIC,Kalman"
+    },
+    {
+      "code": "TC1.2",
+      "name": "Adaptive & Learning Systems",
+      "items": [
+        "MRAC & self-tuning (STR) basics",
+        "Lyapunov stability & adaptation laws",
+        "RLS/gradient adaptation, normalization",
+        "Adaptive observers & parameter estimation",
+        "Adaptive filters (LMS/RLS)",
+        "Robust adaptive: σ-modification, projection",
+        "Iterative Learning Control (ILC), repetitive ctrl",
+        "Reinforcement Learning (value/policy methods)",
+        "Neural/fuzzy approximators in control",
+        "Embedded implementation & robustness tests"
+      ],
+      "keywords": "MRAC,STR,Lyapunov,RLS,LMS,adaptive observer,σ-modification,ILC,RL,neuro-fuzzy"
+    },
+    {
+      "code": "TC1.3",
+      "name": "Discrete Event & Hybrid Systems",
+      "items": [
+        "Finite-state machines (FSM), automata",
+        "Petri nets (timed/colored), reachability",
+        "Supervisory control (Ramadge–Wonham)",
+        "Hybrid automata (guards, resets, invariants)",
+        "Temporal logic (LTL/CTL) & model checking",
+        "Event-triggered/asynchronous control",
+        "Scheduling & resource allocation",
+        "Verification & safety (deadlock, liveness)",
+        "Stateflow, PLC SFC implementation",
+        "Apps: manufacturing lines, networks, traffic"
+      ],
+      "keywords": "FSM,Petri net,supervisory control,hybrid automata,temporal logic,model checking,event-triggered,Stateflow,SFC"
+    },
+    {
+      "code": "TC1.4",
+      "name": "Stochastic Systems",
+      "items": [
+        "Probability & random processes (white noise)",
+        "Stochastic differential equations (SDEs)",
+        "Markov chains & MDPs",
+        "Kalman, EKF, UKF (Gaussian estimation)",
+        "Particle filters (SMC) for nonlinear/non-Gaussian",
+        "Stochastic stability (mean-square)",
+        "LQG & risk-sensitive control",
+        "Noise modeling (Gaussian, Poisson, colored)",
+        "Monte Carlo simulation & variance reduction",
+        "Apps: navigation, finance, communications"
+      ],
+      "keywords": "SDE,MDP,Kalman,EKF,UKF,particle filter,Bayesian,LQG,Monte Carlo"
+    },
+    {
+      "code": "TC1.5",
+      "name": "Networked Systems",
+      "items": [
+        "Graph theory & consensus algorithms",
+        "Network-induced delay & packet loss models",
+        "Distributed/decentralized control basics",
+        "Distributed Kalman/information filters",
+        "Event/self-triggered control for bandwidth saving",
+        "Scheduling & real-time networks (TSN, CAN)",
+        "Stability with delays/jitter",
+        "Security & attack detection in CPS",
+        "Cloud/edge architectures for control",
+        "Multi-agent synchronization & formation"
+      ],
+      "keywords": "consensus,multi-agent,delay,packet loss,distributed control,TSN,CAN,security,CPS"
+    },
+    {
+      "code": "TC1.6",
+      "name": "Distributed Parameter Systems",
+      "items": [
+        "PDE modeling (heat, wave, transport)",
+        "Separation of variables & modal analysis",
+        "FEM/spectral discretization",
+        "Infinite-dimensional stability & semigroups",
+        "Boundary control & observation",
+        "PDE observers (e.g., heat equation)",
+        "Backstepping for PDEs",
+        "Delay systems as DPS, LK functionals",
+        "Model reduction (balanced/modal truncation)",
+        "Simulation tools (PDE Toolbox/COMSOL)"
+      ],
+      "keywords": "PDE,FEM,modal analysis,semigroup,boundary control,backstepping,delay,Lyapunov-Krasovskii,model reduction"
+    },
+
+    {
+      "code": "TC2.1",
+      "name": "Control Design",
+      "items": [
+        "PID design & tuning (ZN, IMC, loop shaping)",
+        "Loop-shaping (Bode/Nyquist margins)",
+        "State feedback & observers (Luenberger)",
+        "Digital control (ZOH, Tustin, Jury)",
+        "Anti-windup & constraint handling",
+        "Gain scheduling & operating-point linearization",
+        "Optimization-based design (LQR/H2/LMIs)",
+        "Fault-tolerant/supervisory structures",
+        "Validation: HIL, robustness tests",
+        "Tooling: MATLAB/Simulink, Python-control"
+      ],
+      "keywords": "PID,loop shaping,state feedback,observer,digital control,Tustin,anti-windup,LQR,LMI"
+    },
+    {
+      "code": "TC2.2",
+      "name": "Linear Control Systems",
+      "items": [
+        "Controllability/observability, PBH tests",
+        "Time/frequency response (Bode/Nyquist/Nichols)",
+        "Pole placement & canonical forms",
+        "MIMO analysis (SVD, interactions, RGA)",
+        "LQR/LQG & separation principle",
+        "Time-delay systems (Smith predictor)",
+        "Internal model principle (tracking/rejection)",
+        "Positive/fractional-order systems (awareness)",
+        "Robust margins & sensitivity",
+        "Infinite-dimensional linear systems (awareness)"
+      ],
+      "keywords": "controllability,observability,pole placement,Bode,Nyquist,MIMO,SVD,LQR,Smith predictor"
+    },
+    {
+      "code": "TC2.3",
+      "name": "Nonlinear Control Systems",
+      "items": [
+        "Phase plane, equilibria, linearization",
+        "Lyapunov stability (direct method)",
+        "Feedback linearization (input-output, state)",
+        "Backstepping design",
+        "Sliding mode control (reaching/sliding)",
+        "Input-to-state stability (ISS), small-gain",
+        "Passivity-based/Energy shaping",
+        "Nonlinear observers, EKF/UKF",
+        "Bifurcation, limit cycles, describing function",
+        "Handling saturation & anti-windup nonlinear"
+      ],
+      "keywords": "Lyapunov,feedback linearization,backstepping,sliding mode,ISS,passivity,EKF,describing function"
+    },
+    {
+      "code": "TC2.4",
+      "name": "Optimal Control",
+      "items": [
+        "Calculus of variations, Euler–Lagrange",
+        "Pontryagin’s Maximum Principle (costates)",
+        "Dynamic programming & HJB",
+        "Finite/infinite-horizon LQR",
+        "LQG: estimator + regulator",
+        "MPC basics (constraints, terminal set/cost)",
+        "SQP/gradient methods for optimal control",
+        "Mixed-integer optimization for hybrid MPC",
+        "Differential games (zero-sum, H∞ link)",
+        "Tools: CasADi, CVX, MPC Toolbox"
+      ],
+      "keywords": "PMP,HJB,LQR,LQG,MPC,SQP,QP,MIQP,differential games"
+    },
+    {
+      "code": "TC2.5",
+      "name": "Robust Control",
+      "items": [
+        "Uncertainty modeling (parametric, unmodeled)",
+        "Small-gain theorem, robust stability",
+        "H∞ synthesis & loop shaping",
+        "H2/H∞ mixed objectives",
+        "LMIs for control/estimation",
+        "μ-analysis & D–K iteration (awareness)",
+        "QFT frequency templates",
+        "Robust observers (H∞ filter)",
+        "Randomized/probabilistic verification",
+        "MATLAB Robust Control Toolbox"
+      ],
+      "keywords": "H∞,H2,LMI,mu-synthesis,D–K,small gain,QFT,robustness"
+    },
+    {
+      "code": "TC2.6",
+      "name": "Distributed Parameter Systems (Design)",
+      "items": [
+        "PDE controllability/observability",
+        "Boundary feedback controllers",
+        "Observer design for DPS",
+        "Backstepping kernels (Volterra)",
+        "Delay compensation via LK functionals",
+        "Stability proofs in infinite dim.",
+        "Model reduction for controller design",
+        "Numerics & discretization pitfalls",
+        "Port-Hamiltonian DPS (energy-based)",
+        "Case studies: thermal, flexible beams"
+      ],
+      "keywords": "PDE control,boundary feedback,observer,backstepping,delay,LK,functionals,port-Hamiltonian"
+    },
+
+    {
+      "code": "TC3.1",
+      "name": "Computers for Control",
+      "items": [
+        "MCUs, DSPs, FPGAs for control loops",
+        "RTOS scheduling (RMS, EDF), latency/jitter",
+        "Model-based design & code gen (Simulink/EC)",
+        "Fixed-point & numeric stability",
+        "HIL/SIL testing & verification",
+        "Industrial comms: CAN, Ethernet/TSN, Modbus",
+        "Mixed-criticality & partitioning",
+        "Safety cases & formal methods (basics)",
+        "C/ASM performance profiling",
+        "PLC programming (IEC 61131-3)"
+      ],
+      "keywords": "RTOS,RMS,EDF,Embedded C,Fixed-point,HIL,TSN,CAN,PLC,IEC61131-3"
+    },
+    {
+      "code": "TC3.2",
+      "name": "Computational Intelligence in Control",
+      "items": [
+        "Fuzzy logic control (membership, rules)",
+        "Neural nets as function approximators",
+        "Evolutionary algorithms (GA/PSO) for tuning",
+        "Reinforcement Learning (DQN/DDPG basics)",
+        "Neuro-fuzzy (ANFIS) concepts",
+        "Stability/robustness of AI controllers",
+        "System ID with ML (nonlinear models)",
+        "Feature engineering for control signals",
+        "Validation & safety for learned policies",
+        "Tooling: PyTorch/TensorFlow, MATLAB"
+      ],
+      "keywords": "fuzzy,NN,GA,PSO,RL,DQN,DDPG,ANFIS,stability"
+    },
+    {
+      "code": "TC3.3",
+      "name": "Telematics – Control via Networks",
+      "items": [
+        "Teleoperation with delays & jitter",
+        "SCADA/remote monitoring architecture",
+        "IoT protocols (MQTT/CoAP) trade-offs",
+        "Edge vs cloud control partitioning",
+        "Networked control stability (delay models)",
+        "Security (TLS/VPN, auth), threat models",
+        "QoS & congestion for control traffic",
+        "Haptic feedback over networks",
+        "Remote diagnostics & tuning",
+        "Standards: OPC UA, DDS"
+      ],
+      "keywords": "teleoperation,SCADA,IoT,MQTT,edge,cloud,delay,OPC UA,DDS,security"
+    },
+
+    {
+      "code": "TC4.1",
+      "name": "Human–Machine Systems",
+      "items": [
+        "Human factors & ergonomics basics",
+        "Human-in-the-loop models (crossover)",
+        "Shared control & authority management",
+        "Decision support & alarm management",
+        "UI/UX for control HMIs",
+        "Adaptive automation levels",
+        "Operator workload & cognitive load",
+        "Training simulators & VR labs",
+        "Resilience & human-centered design",
+        "Standards & ethics considerations"
+      ],
+      "keywords": "HMI,human factors,shared control,alarm mgmt,automation levels,simulator,UX"
+    },
+    {
+      "code": "TC4.2",
+      "name": "Mechatronic Systems",
+      "items": [
+        "Co-design: mechanics, electronics, control",
+        "Actuators & drivers (PWM, H-bridge)",
+        "Sensors & conditioning (IMU, encoders)",
+        "Motion control (cascade loops, feedforward)",
+        "Vibration suppression (notch/active damping)",
+        "Trajectory generation (S-curve, splines)",
+        "Real-time embedded programming",
+        "HIL & rapid prototyping",
+        "System engineering (V-model)",
+        "Micro/nano mechatronics awareness"
+      ],
+      "keywords": "servo,PID,cascade,feedforward,notch,H-bridge,IMU,HIL"
+    },
+    {
+      "code": "TC4.3",
+      "name": "Robotics",
+      "items": [
+        "Kinematics (FK/IK), Jacobians",
+        "Dynamics (Euler–Lagrange/Newton–Euler)",
+        "Computed torque & PD+gravity",
+        "Impedance/admittance control",
+        "Trajectory planning (joint/Cartesian)",
+        "Localization & sensor fusion (EKF/UKF)",
+        "SLAM (pose graph, loop closure basics)",
+        "Navigation & guidance (pure pursuit)",
+        "ROS basics (nodes, topics)",
+        "Safety & standards for cobots"
+      ],
+      "keywords": "FK,IK,Jacobian,computed torque,impedance,SLAM,ROS,guidance"
+    },
+
+    {
+      "code": "TC5.1",
+      "name": "Manufacturing Plant Control",
+      "items": [
+        "Automation pyramid (PLC/SCADA/DCS/MES/ERP)",
+        "Industrial comms (PROFINET/EtherCAT/CANopen)",
+        "Sequence control (SFC, Petri nets)",
+        "Regulatory loops (PID, cascade, FF)",
+        "Multivariable/MPC in process units",
+        "Condition monitoring & alarms",
+        "Flexible/reconfigurable architectures",
+        "Remote ops & IIoT integration",
+        "Safety instrumented systems (SIS)",
+        "Hands-on: PLC + HMI development"
+      ],
+      "keywords": "PLC,SCADA,DCS,MES,ERP,EtherCAT,sequence control,PID,SIS,HMI"
+    },
+    {
+      "code": "TC5.2",
+      "name": "Management & Control in Manufacturing/Logistics",
+      "items": [
+        "Production planning & scheduling (job-shop)",
+        "Supply chain dynamics (bullwhip)",
+        "Inventory control (EOQ, reorder point)",
+        "SPC & quality control charts",
+        "Predictive/preventive maintenance",
+        "ERP–MES–SCADA integration (ISA-95)",
+        "AGV/AMR routing & warehouse control",
+        "Lean (takt, pull/Kanban) & feedback",
+        "Simulation (DES) & optimization",
+        "KPIs: OEE, throughput, lead time"
+      ],
+      "keywords": "scheduling,SPC,EOQ,bullwhip,ISA-95,Kanban,DES,OEE"
+    },
+    {
+      "code": "TC5.3",
+      "name": "Integration & Interoperability of Enterprise Systems",
+      "items": [
+        "Enterprise architectures (CIMOSA, PERA, ISA-95)",
+        "EAI middleware, APIs (REST/SOAP)",
+        "OPC UA & data modeling",
+        "B2MML/AutomationML standards",
+        "Digital twins & IIoT platforms",
+        "ESB/message brokers (MQ, Kafka awareness)",
+        "Security & IAM for OT/IT",
+        "Model-driven engineering (SysML/UML)",
+        "Data pipelines & warehousing",
+        "Change management & validation"
+      ],
+      "keywords": "ISA-95,OPC UA,B2MML,AutomationML,ESB,IIoT,SysML,API"
+    },
+    {
+      "code": "TC5.4",
+      "name": "Large Scale Complex Systems",
+      "items": [
+        "Decentralized & hierarchical control",
+        "Distributed optimization (ADMM basics)",
+        "Model reduction & aggregation",
+        "Multi-agent/consensus in large nets",
+        "Complex network metrics (centrality)",
+        "Resilience & fault tolerance",
+        "Wide-area monitoring & control",
+        "Anomaly detection in high-dim data",
+        "Co-simulation with domain tools",
+        "Case studies: grids, traffic, process parks"
+      ],
+      "keywords": "decentralized,hierarchical,ADMM,model reduction,consensus,resilience"
+    },
+
+    {
+      "code": "TC6.1",
+      "name": "Chemical Process Control",
+      "items": [
+        "Mass/energy balances, linearization",
+        "Regulatory PID (level/flow/pressure/temp)",
+        "Cascade/feedforward/split-range",
+        "Dead-time compensation (Smith/IMC)",
+        "MPC for MIMO units (columns/reactors)",
+        "RTO layer & economic objectives",
+        "Nonlinear/adaptive (pH, exothermic CSTR)",
+        "State estimation & soft sensors",
+        "Batch control & ISA-88 recipes",
+        "Instrumentation (valves, transmitters)"
+      ],
+      "keywords": "CSTR,distillation,PID,IMC,Smith,MPC,RTO,ISA-88,soft sensor"
+    },
+    {
+      "code": "TC6.2",
+      "name": "Mining, Mineral & Metal Processing",
+      "items": [
+        "Process models (crushing, grinding, flotation)",
+        "Image/soft sensors (froth vision, PSD)",
+        "Advanced control of mills (constraints)",
+        "Extremum seeking for throughput/grade",
+        "Autonomy (haul trucks, drill rigs)",
+        "Nonlinear/adaptive for metallurgical units",
+        "Scheduling & batch heat treatments",
+        "Fault tolerance & redundancy",
+        "AI models (NN) for quality prediction",
+        "Env. constraints & compliance control"
+      ],
+      "keywords": "grinding,flotation,soft sensor,extremum seeking,autonomous haul,NN"
+    },
+    {
+      "code": "TC6.3",
+      "name": "Power & Energy Systems",
+      "items": [
+        "AGC & frequency control",
+        "Excitation/AVR & voltage stability",
+        "Small-signal stability & PSS",
+        "OPF & economic dispatch",
+        "Inverter control, droop, microgrids",
+        "Renewables (MPPT, wind pitch/torque)",
+        "FACTS & HVDC control",
+        "Demand response & EMS",
+        "PMUs & wide-area damping control",
+        "Protection & emergency controls"
+      ],
+      "keywords": "AGC,AVR,PSS,OPF,droop,microgrid,FACTS,HVDC,PMU"
+    },
+    {
+      "code": "TC6.4",
+      "name": "Fault Detection, Supervision & Safety (SAFEPROCESS)",
+      "items": [
+        "Residual generation (parity/observer-based)",
+        "FDI: detection, isolation, severity",
+        "Statistical change detection (CUSUM/GLR)",
+        "H∞/robust observers for FDI",
+        "Signal-based diagnostics (vibration/FFT)",
+        "Data-driven anomaly detection (PCA/ML)",
+        "Fault-tolerant control (passive/active)",
+        "Redundancy & voting (2oo3)",
+        "Standards (IEC 61508) & safety cases",
+        "Benchmarks: TE process, DAMADICS"
+      ],
+      "keywords": "FDI,residual,CUSUM,GLR,robust observer,PCA,FTC,IEC61508"
+    },
+
+    {
+      "code": "TC7.1",
+      "name": "Automotive Control",
+      "items": [
+        "Engine control (AFR, spark, boost, idle)",
+        "Vehicle dynamics (lateral/longitudinal)",
+        "ABS/TCS/ESC control strategies",
+        "Powertrain & shift control",
+        "Hybrid/EV energy management (MPC/rule-based)",
+        "In-vehicle networks (CAN/LIN/FlexRay)",
+        "Kalman-based estimation (slip, friction)",
+        "Gain scheduling & robustness",
+        "ADAS low-level control (ACC/LK)",
+        "Diagnostics & OBD, limp-home"
+      ],
+      "keywords": "AFR,ABS,ESC,ACC,LK,CAN,hybrid MPC,OBD"
+    },
+    {
+      "code": "TC7.2",
+      "name": "Marine Systems",
+      "items": [
+        "Ship dynamics (surge/sway/yaw)",
+        "Course-keeping & track control",
+        "Dynamic positioning (DP) & thrust allocation",
+        "AUV control (depth/heading, buoyancy)",
+        "USV/ROV station keeping",
+        "LOS guidance & COLREGs awareness",
+        "Sensor fusion (GPS/DVL/INS)",
+        "Wave/wind/current disturbance handling",
+        "Engine/propulsion control",
+        "FDI & redundancy at sea"
+      ],
+      "keywords": "Nomoto,DP,thrust allocation,AUV,USV,LOS,DVL,INS"
+    },
+    {
+      "code": "TC7.3",
+      "name": "Aerospace",
+      "items": [
+        "Aircraft flight dynamics (modes: SP, phugoid, Dutch roll)",
+        "Stability & command augmentation",
+        "Autopilots (attitude/altitude/ILS)",
+        "Avionics & sensor fusion (ADIRU)",
+        "GN&C architecture",
+        "Spacecraft attitude (reaction wheels/CMGs)",
+        "Orbital mechanics & station-keeping",
+        "Formation flying (Clohessy–Wiltshire)",
+        "FDIR & reconfiguration",
+        "Certification constraints (DO-178C awareness)"
+      ],
+      "keywords": "SP,phugoid,Dutch roll,autopilot,ADIRU,GN&C,CMG,CW,FDIR,DO-178C"
+    },
+    {
+      "code": "TC7.4",
+      "name": "Transportation Systems",
+      "items": [
+        "Traffic flow models (LWR, IDM)",
+        "Urban signals (fixed/actuated/adaptive)",
+        "Ramp metering (ALINEA)",
+        "Variable speed limits & harmonization",
+        "Transit signal priority & headway control",
+        "Routing/information systems impact",
+        "Safety systems (PTC, ATO basics)",
+        "Integrated multimodal control",
+        "Simulation (SUMO/VISSIM) & calibration",
+        "KPIs: delay, travel time, throughput"
+      ],
+      "keywords": "LWR,IDM,ALINEA,adaptive signals,VSL,PTC,SUMO,VISSIM"
+    },
+    {
+      "code": "TC7.5",
+      "name": "Intelligent Autonomous Vehicles",
+      "items": [
+        "Localization/SLAM (lidar/visual, loop closure)",
+        "Perception (detection/fusion: radar+camera)",
+        "Path planning (A*, RRT*, trajectory opt.)",
+        "Trajectory tracking (pure pursuit, MPC)",
+        "Vehicle/drone dynamics limits",
+        "Platooning & string stability",
+        "Fault tolerance & fallback behaviors",
+        "Safe learning & policy validation",
+        "Human–vehicle interaction & takeover",
+        "Simulation stacks (CARLA/Gazebo)"
+      ],
+      "keywords": "SLAM,RRT*,A*,pure pursuit,MPC,string stability,fallback,CARLA"
+    },
+
+    {
+      "code": "TC8.1",
+      "name": "Control in Agriculture",
+      "items": [
+        "Greenhouse climate models & MIMO control",
+        "Irrigation control & soil moisture sensing",
+        "CO2/light/humidity coordination",
+        "Weather feedforward & forecasting",
+        "Precision farming (GPS/VRA)",
+        "Livestock environment control",
+        "Post-harvest (drying/storage) control",
+        "Ag robots (path following, compliance)",
+        "Resource optimization (water/energy)",
+        "WSN deployment & reliability"
+      ],
+      "keywords": "greenhouse,MPC,irrigation,precision ag,VRA,WSN"
+    },
+    {
+      "code": "TC8.2",
+      "name": "Biological & Medical Systems",
+      "items": [
+        "Physiological models (glucose–insulin, cardio)",
+        "Biomedical signal processing (ECG/EEG)",
+        "Closed-loop drug delivery (insulin/anesthesia)",
+        "Ventilator/ICU multi-loop control",
+        "Rehab/exoskeleton impedance control",
+        "EMG/EEG intent decoding (basics)",
+        "Imaging-device control (MRI/US motion)",
+        "Clinical decision support",
+        "Safety/regulatory mindset",
+        "Validation with clinical data"
+      ],
+      "keywords": "artificial pancreas,ECG,EEG,ventilator,impedance,EMG,decision support"
+    },
+    {
+      "code": "TC8.3",
+      "name": "Modelling & Control of Environmental Systems",
+      "items": [
+        "Water quality & hydrology models (PDE/ODE)",
+        "Reservoir/river control (MPC, stochastic)",
+        "Urban drainage RTC",
+        "Air quality dispersion & emission control",
+        "Risk management (flood/drought)",
+        "Data assimilation & forecasting",
+        "GIS & remote sensing integration",
+        "Stakeholder/participatory control",
+        "Multi-objective optimization (Pareto)",
+        "Case studies: basins, cities"
+      ],
+      "keywords": "reservoir,MPC,RTC,air quality,assimilation,GIS,Pareto"
+    },
+    {
+      "code": "TC8.4",
+      "name": "Biosystems & Bioprocesses",
+      "items": [
+        "Bioprocess kinetics (Monod), mass balances",
+        "State/parameter estimation (soft sensors)",
+        "Bioreactor control: pH/DO/temp",
+        "Fed-batch profiles & optimal harvest time",
+        "Batch scheduling & optimization",
+        "Integrated biorefinery control",
+        "Metabolic control (induction strategies)",
+        "Downstream (chromatography) control",
+        "Multivariate SPC (PCA/PLS)",
+        "Bio instrumentation & analytics"
+      ],
+      "keywords": "Monod,bioreactor,pH,DO,fed-batch,soft sensor,PCA,PLS"
+    },
+
+    {
+      "code": "TC9.1",
+      "name": "Economic, Business & Financial Systems",
+      "items": [
+        "Dynamic econ models (DSGE, IS–LM awareness)",
+        "Optimal control in econ (Ramsey, LQR analogy)",
+        "Dynamic programming/Bellman in econ",
+        "Stochastic control & portfolio (Merton)",
+        "Game theory (Nash, mechanism design basics)",
+        "Market microstructure & feedback",
+        "Agent-based modeling",
+        "Econometrics/time-series for ID",
+        "Risk metrics & constraints",
+        "Policy design as feedback"
+      ],
+      "keywords": "DSGE,Ramsey,Bellman,Merton,Nash,agent-based,econometrics"
+    },
+    {
+      "code": "TC9.2",
+      "name": "Systems & Control for Societal Impact",
+      "items": [
+        "Human-in-the-loop & behavior models",
+        "Cross-disciplinary integration (opt/learn/comm)",
+        "Cognitive automation impacts",
+        "5G/IoT infrastructure constraints",
+        "Fairness/ethics constraints in control",
+        "Social network influence models",
+        "Agile/resilient system design",
+        "Non-technical metrics (equity, well-being)",
+        "Transparency & explainability",
+        "Pandemic-style policy optimal control (SIR)"
+      ],
+      "keywords": "human-in-loop,fairness,5G,IoT,social influence,SIR,explainability"
+    },
+    {
+      "code": "TC9.3",
+      "name": "Control for Smart Cities",
+      "items": [
+        "Integrated urban mobility control",
+        "Smart buildings (HVAC models & DR)",
+        "Microgrids & district energy",
+        "Water/waste networks operations",
+        "Air/noise monitoring & mitigation",
+        "City platforms & data standards",
+        "Emergency response coordination",
+        "Citizen-in-the-loop incentives",
+        "Urban robotics & UTM",
+        "Scalability & interoperability"
+      ],
+      "keywords": "HVAC,DR,microgrid,water SCADA,UTM,open data,standards"
+    },
+    {
+      "code": "TC9.4",
+      "name": "Control Education",
+      "items": [
+        "Curriculum design (theory ↔ practice)",
+        "MATLAB/Python/Simulink in teaching",
+        "Remote/virtual labs",
+        "Project-based learning",
+        "Interdisciplinary modules (AI/DS)",
+        "Online/blended methods",
+        "Short courses & MOOCs",
+        "Lab development & safety",
+        "Education research (misconceptions)",
+        "Industry relevance & case studies"
+      ],
+      "keywords": "remote lab,project-based,MOOC,Simulink,Python"
+    },
+    {
+      "code": "TC9.5",
+      "name": "Technology, Culture & International Stability (TECIS)",
+      "items": [
+        "Systems thinking (global interactions)",
+        "Stabilization policies (negative feedback)",
+        "Tech impact assessment",
+        "Ethical control frameworks",
+        "Resilience & basic services (water/energy)",
+        "Cultural adaptation of tech",
+        "Open knowledge & capacity building",
+        "Climate mitigation/adaptation control",
+        "Disaster response automation",
+        "Continuous learning & cross-cultural skills"
+      ],
+      "keywords": "systems thinking,ethics,resilience,climate,disaster response,capacity building"
+    }
+  ]
+}
