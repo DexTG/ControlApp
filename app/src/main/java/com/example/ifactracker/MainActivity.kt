@@ -11,6 +11,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.text.input.KeyboardOptions
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -46,18 +52,32 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IFACApp() {
     MaterialTheme {
-        val vm: IFACViewModel = viewModel(factory = IFACViewModel.factory(LocalContext.current.applicationContext as Application))
+        val app = LocalContext.current.applicationContext as Application
+        val vm: IFACViewModel = viewModel(factory = IFACViewModel.factory(app))
         val uiState by vm.uiState.collectAsState()
 
-        Surface(modifier = Modifier.fillMaxSize()) {
-            Column(Modifier.fillMaxSize()) {
-                TopAppBar(
-                    title = { Text("IFAC Tracker") },
-                )
+        var showAdd by rememberSaveable { mutableStateOf(false) }
+
+        Scaffold(
+            topBar = {
+                TopAppBar(title = { Text("IFAC Tracker") })
+            },
+            floatingActionButton = {
+                FloatingActionButton(onClick = { showAdd = true }) {
+                    Icon(Icons.Default.Add, contentDescription = "Add Topic")
+                }
+            }
+        ) { padding ->
+            Column(
+                Modifier
+                    .padding(padding)
+                    .fillMaxSize()
+            ) {
                 SearchBar(
                     query = uiState.query,
                     onQueryChange = vm::setQuery,
@@ -79,8 +99,18 @@ fun IFACApp() {
                 }
             }
         }
+
+        if (showAdd) {
+            AddTcDialog(
+                onDismiss = { showAdd = false },
+                onConfirm = { code, name, items, keywords ->
+                    vm.addCustomTc(codeIfBlank = code, name = name, items = items, keywords = keywords)
+                }
+            )
+        }
     }
 }
+
 
 @Composable
 private fun SearchBar(query: String, onQueryChange: (String) -> Unit, clear: () -> Unit) {
@@ -159,39 +189,106 @@ private fun TCItemCard(
     }
 }
 
+
+@Composable
+private fun AddTcDialog(
+    onDismiss: () -> Unit,
+    onConfirm: (code: String, name: String, items: List<String>, keywords: String) -> Unit
+) {
+    var code by rememberSaveable { mutableStateOf("") }
+    var name by rememberSaveable { mutableStateOf("") }
+    var itemsText by rememberSaveable { mutableStateOf("") }
+    var keywords by rememberSaveable { mutableStateOf("") }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Add Topic (TC)") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                OutlinedTextField(
+                    value = code, onValueChange = { code = it },
+                    label = { Text("TC Code (e.g., USER-1)") }, singleLine = true
+                )
+                OutlinedTextField(
+                    value = name, onValueChange = { name = it },
+                    label = { Text("Name") }, singleLine = true
+                )
+                OutlinedTextField(
+                    value = itemsText, onValueChange = { itemsText = it },
+                    label = { Text("Bullets (one per line)") },
+                    minLines = 4
+                )
+                OutlinedTextField(
+                    value = keywords, onValueChange = { keywords = it },
+                    label = { Text("Keywords (comma-separated)") }, singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                val items = itemsText
+                    .split('\n')
+                    .map { it.trim() }
+                    .filter { it.isNotEmpty() }
+                onConfirm(code.trim(), name.trim(), items, keywords.trim())
+                onDismiss()
+            }) { Text("Add") }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text("Cancel") }
+        }
+    )
+}
+
+
+
+
+
+
 class IFACViewModel(app: Application) : AndroidViewModel(app) {
+
+    // --- DataStore keys & local state ---
+    private val USER_TCS_KEY = stringPreferencesKey("user_tcs_json")
+    private val dataStore = app.dataStore
+
+    private val _query = MutableStateFlow("")
+    private val _all = MutableStateFlow<List<TC>>(emptyList())      // built-in TCs (from assets)
+    private val _user = MutableStateFlow<List<TC>>(emptyList())     // user-added TCs (from DataStore)
+
     data class UiState(
-        val all: List<TC> = emptyList(),
+        val all: List<TC> = emptyList(),          // merged list (built-in + user)
         val filtered: List<TC> = emptyList(),
         val checked: Map<String, Boolean> = emptyMap(),
         val query: String = "",
         val overallProgress: Float = 0f
     )
 
-    private val dataStore = app.dataStore
-    private val _query = MutableStateFlow("")
-    private val _all = MutableStateFlow<List<TC>>(emptyList())
-
+    // Merge built-in + user lists, then combine with query + checkbox prefs
     val uiState: StateFlow<UiState> = combine(
-        _all,
+        _all.combine(_user) { builtIn, user -> builtIn + user },
         _query,
-        dataStore.data.map { it.asMap().mapKeys { e -> e.key.name } // Preferences -> Map<String, Any>
-            .mapValues { (k, v) -> v as? Boolean ?: false }
+        dataStore.data.map {
+            it.asMap()
+                .mapKeys { e -> e.key.name }                       // Preferences.Key<Boolean> -> String
+                .mapValues { (_, v) -> v as? Boolean ?: false }    // any non-boolean becomes false
         }
-    ) { all, query, checked ->
-        val filt = if (query.isBlank()) all else {
+    ) { allMerged, query, checked ->
+        val filt = if (query.isBlank()) allMerged else {
             val q = query.trim().lowercase()
-            all.filter { tc ->
+            allMerged.filter { tc ->
                 tc.code.lowercase().contains(q) ||
                 tc.name.lowercase().contains(q) ||
                 tc.keywords.lowercase().contains(q) ||
                 tc.items.any { it.lowercase().contains(q) }
             }
         }
-        val totalItems = all.sumOf { it.items.size }
-        val done = all.sumOf { tc -> tc.items.count { checked[hashKey(tc.code, it)] == true } }
+
+        val totalItems = allMerged.sumOf { it.items.size }
+        val done = allMerged.sumOf { tc -> tc.items.count { checked[hashKey(tc.code, it)] == true } }
+
         UiState(
-            all = all,
+            all = allMerged,
             filtered = filt,
             checked = checked,
             query = query,
@@ -200,10 +297,29 @@ class IFACViewModel(app: Application) : AndroidViewModel(app) {
     }.stateIn(viewModelScope, SharingStarted.Eagerly, UiState())
 
     init {
+        // Load built-in TCs from assets
         viewModelScope.launch {
             _all.value = loadFromAssets(app = app)
         }
+        // Load user-added TCs from DataStore and keep them updated
+        viewModelScope.launch {
+            dataStore.data.collect { prefs ->
+                val json = prefs[USER_TCS_KEY]
+                if (json.isNullOrBlank()) {
+                    _user.value = emptyList()
+                } else {
+                    try {
+                        val parsed = Json.decodeFromString(TCWrapper.serializer(), json).tcs
+                        _user.value = parsed
+                    } catch (_: Exception) {
+                        _user.value = emptyList()
+                    }
+                }
+            }
+        }
     }
+
+    // --- UI actions ---
 
     fun setQuery(q: String) { _query.value = q }
 
@@ -217,12 +333,51 @@ class IFACViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 
+    // Add a brand-new user TC (or replace one with the same code)
+    fun addCustomTc(codeIfBlank: String, name: String, items: List<String>, keywords: String) {
+        val code = if (codeIfBlank.isBlank()) {
+            val next = (_user.value.size + 1).toString().padStart(3, '0')
+            "USER-$next"
+        } else codeIfBlank
+
+        val newTc = TC(
+            code = code,
+            name = if (name.isBlank()) "Custom Topic $code" else name,
+            items = items.ifEmpty { listOf("Example bullet 1", "Example bullet 2") },
+            keywords = keywords
+        )
+
+        val updated = _user.value
+            .filterNot { it.code == code }   // replace if same code
+            .plus(newTc)
+
+        saveUserTcs(updated)
+    }
+
+    // Add a bullet to an existing user TC
+    fun addItemToTc(targetCode: String, newItem: String) {
+        if (newItem.isBlank()) return
+        val updated = _user.value.map {
+            if (it.code == targetCode) it.copy(items = it.items + newItem) else it
+        }
+        saveUserTcs(updated)
+    }
+
+    private fun saveUserTcs(list: List<TC>) {
+        viewModelScope.launch {
+            val json = Json.encodeToString(TCWrapper.serializer(), TCWrapper(tcs = list))
+            dataStore.edit { prefs -> prefs[USER_TCS_KEY] = json }
+            _user.value = list
+        }
+    }
+
     companion object {
         fun factory(app: Application): ViewModelProvider.Factory = viewModelFactory {
-        initializer { IFACViewModel(app) }
+            initializer { IFACViewModel(app) }
+        }
     }
 }
-}
+
 
 @Serializable
 @Keep
