@@ -41,6 +41,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.encodeToString
 import java.security.MessageDigest
 
 private val Application.dataStore by preferencesDataStore(name = "ifac_progress")
